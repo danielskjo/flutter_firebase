@@ -3,22 +3,26 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/widgets/text_field_input.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _usernameController.dispose();
+    _bioController.dispose();
   }
 
   @override
@@ -41,6 +45,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 64,
                   ),
                   const SizedBox(height: 64),
+                  Stack(
+                    children: [
+                      const CircleAvatar(
+                        radius: 64,
+                        backgroundImage:
+                            NetworkImage('https://i.stack.imgur.com/l60Hf.png'),
+                      ),
+                      Positioned(
+                        bottom: -10,
+                        left: 80,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.add_a_photo),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  TextFieldInput(
+                    textEditingController: _usernameController,
+                    hintText: 'Enter your username',
+                    textInputType: TextInputType.text,
+                  ),
+                  const SizedBox(height: 24),
                   TextFieldInput(
                     textEditingController: _emailController,
                     hintText: 'Enter your email',
@@ -54,9 +82,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     isPass: true,
                   ),
                   const SizedBox(height: 24),
+                  TextFieldInput(
+                    textEditingController: _bioController,
+                    hintText: 'Enter your bio',
+                    textInputType: TextInputType.text,
+                  ),
+                  const SizedBox(height: 24),
                   InkWell(
                     child: Container(
-                      child: const Text('Login'),
+                      child: const Text('Sign up'),
                       width: double.infinity,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -79,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: const Text('Don\'t have an account?'),
+                        child: const Text('Already have an account?'),
                         padding: const EdgeInsets.symmetric(
                           vertical: 8,
                         ),
@@ -88,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () {},
                         child: Container(
                           child: const Text(
-                            'Sign up',
+                            'Login',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
